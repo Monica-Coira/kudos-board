@@ -1,0 +1,71 @@
+.kudos-board {
+    text-align: center;
+    padding: 15px;
+    width: calc(100% / 8);
+    margin: 35px;
+    display: inline-block;
+}
+
+.kudos-board-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.kudos-board-buttons {
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    gap: 10px;
+}
+
+.view-board-button {
+    background-color: #00D8D8;
+}
+
+.delete-board-button {
+    background-color: #00D8D8;
+}
+
+.kudos-board:hover {
+    transform: scale(1.03) translateY(-2px);
+}
+
+/* @media (max-width: 700px) {
+    .movie-card {
+        flex: 1 1 200px;
+    }
+
+    .watched-image .favorite-image{
+        width: 6%;
+        height: 3%;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .movie-card {
+        flex: 1 1 200px;
+    }
+
+    .watched-image .favorite-image{
+        width: 8%;
+        height: 4%;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+} */
