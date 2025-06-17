@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import BoardPage from './BoardPage.jsx';
 import './App.css'
 import boardData from './data.js'
 import SearchForm from './SearchForm';
@@ -7,6 +10,13 @@ import CreateBoard from './CreateBoard';
 import BoardList from './BoardList.jsx';
 
 const App = () => {
+  <BrowserRouter>
+    <Routes>
+      <Route exact path='/' element={<App />}/>
+      <Route path='/boardpage' element={<BoardPage />}/>
+    </Routes>
+  </BrowserRouter>
+  
   return (
     <div className="app">
       <header className="app-header">
@@ -19,7 +29,7 @@ const App = () => {
       </header>
 
       <main className="app-main">
-        <BoardList data={boardData}/>
+        <BoardList data={boardData} />
       </main>
 
       <footer>
