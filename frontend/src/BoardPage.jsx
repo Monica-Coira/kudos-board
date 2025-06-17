@@ -1,16 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 
 const BoardPage = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    // const handleBackButton = () => {
-    //     navigate('/'); 
-    // };
+    const handleBackButton = () => {
+        navigate('/'); 
+    };
 
     return (
         <div>
             <p>New Page</p>
-            <button>Back to Home</button>
+            <button onClick={handleBackButton}>Back to Home</button>
         </div>
     );
 }
