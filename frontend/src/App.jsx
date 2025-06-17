@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Kudos Board</h1>
+        <h1 className="app-title">Kudos Board</h1>
         <section className="header-forms">
           <SearchForm />
           <SortForm />

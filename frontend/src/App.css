@@ -8,6 +8,10 @@
   padding: 0;
 }
 
+.app-title {
+  font-size: 40px;
+}
+
 .app-header {
   display: flex;
   flex-direction: column; 

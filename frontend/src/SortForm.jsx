@@ -1,7 +1,9 @@
+import './SortForm.css'
+
 const SortForm = () => {
     return (
-        <div className="sort-dropdown">
-            <select name="sort">
+        <div>
+            <select name="sort" className="sort-dropdown">
                 <option disabled selected>Sort By Category</option>
                 <option value="all">All</option>
                 <option value="recent">Recent</option>

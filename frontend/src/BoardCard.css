@@ -1,0 +1,37 @@
+.board-card {
+    text-align: center;
+    padding: 15px;
+    width: calc(100% / 3);
+    margin: 35px;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+}
+
+.board-card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.board-card-buttons {
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    gap: 15px;
+    margin: 15px;
+}
+
+.upvote-button {
+    background-color: #00D8D8;
+}
+
+.board-card-delete-button {
+    background-color: #00D8D8;
+}
+
+.board-card:hover {
+    transform: scale(1.03) translateY(-2px);
+}

@@ -1,0 +1,17 @@
+.search-bar {
+    display: flex;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 10px;
+    width: 300px;
+}
+
+.search-button {
+    background-color: #00D8D8;
+}
+
+.clear-button {
+    background-color: #00D8D8;
+}
