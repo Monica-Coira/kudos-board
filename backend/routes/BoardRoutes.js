@@ -24,12 +24,16 @@ router.get('/search/:title', async (req, res) => {
     res.json(board);
 })
 
-router.get('/sort/:category', async (req, res) => {
-    const boardCategory = parseInt(req.params.category)
-    const board = await prisma.board.findMany({
-        where: { category: parseInt(boardCategory) },
+router.get('/sort/', async (req, res) => {
+    const { category } = req.query;
+    let filters = {};
+    if (category){
+        filters.category = category;
+    }
+    const filteredUsers = await prisma.board.findMany({
+        where: category,
     });
-    res.json(board);
+    res.json(filteredUsers);
 })
 
 router.post('/', async (req, res) => {
