@@ -8,32 +8,39 @@ router.get('/', async (req, res) => {
     res.json(boards);
 })
 
+// Filter by category
+router.get('/sort', async (req, res) => {
+    const { category } = req.query;
+    let filters = {};
+    if (category){
+        filters.category = category;
+    }
+    const filteredBoards = await prisma.board.findMany({
+        where: {category : filters.category},
+    });
+    res.json(filteredBoards);
+})
+
+// Search boards by title
+router.get('/search', async (req, res) => {
+    const { title } = req.query;
+    let filters = {};
+    if (title){
+        filters.title = title;
+    }
+    const filteredBoards = await prisma.board.findMany({
+        where: {title : filters.title},
+    });
+    res.json(filteredBoards);
+})
+
+// Get board by ID
 router.get('/:boardId', async (req, res) => {
     const boardId = parseInt(req.params.boardId)
     const board = await prisma.board.findUnique({
         where: { id: parseInt(boardId) },
     });
     res.json(board);
-})
-
-router.get('/search/:title', async (req, res) => {
-    const boardTitle = parseInt(req.params.title)
-    const board = await prisma.board.findMany({
-        where: { title: parseInt(boardTitle) },
-    });
-    res.json(board);
-})
-
-router.get('/sort/', async (req, res) => {
-    const { category } = req.query;
-    let filters = {};
-    if (category){
-        filters.category = category;
-    }
-    const filteredUsers = await prisma.board.findMany({
-        where: category,
-    });
-    res.json(filteredUsers);
 })
 
 router.post('/', async (req, res) => {
