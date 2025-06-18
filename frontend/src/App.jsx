@@ -9,14 +9,14 @@ import { useState, useEffect } from 'react';
 const App = () => {
   const [boardData, setBoardData] = useState([])
 
-  const fetchData = async (parameter) => {
+  const fetchData = async (parameter, dataSetter) => {
     try {
       const response = await fetch(`http://localhost:3000/${parameter}`);
       if (!response.ok){
         throw new Error('Not able to fetch data.')
       }
       const data = await response.json();
-      setBoardData(data);
+      dataSetter(data);
     }
     catch {
       console.log("Error fetching data.")
@@ -24,7 +24,7 @@ const App = () => {
   }
 
   const fetchBoardData = async () => {
-    fetchData("boards/");
+    fetchData("boards/", setBoardData);
   }
 
   useEffect(() => {

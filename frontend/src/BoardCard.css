@@ -1,16 +1,16 @@
 .board-card {
     text-align: center;
     padding: 15px;
-    width: calc(100% / 3);
+    width: calc(100% / 6);
     margin: 35px;
     display: inline-block;
     border: 1px solid black;
-    border-radius: 10px;
     box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    border-radius: 10px;
 }
 
 .board-card-image {
-    display: block;
+    display: flex;
     width: 100%;
     height: auto;
     border-radius: 10px;
@@ -20,8 +20,7 @@
     display: flex;
     justify-content: center;
     font-size: 12px;
-    gap: 15px;
-    margin: 15px;
+    gap: 10px;
 }
 
 .upvote-button {

@@ -7,7 +7,7 @@ const BoardList = ({data}) => {
                 {
                     data.map(obj => {
                         return (
-                            <KudosBoard key={obj.id} image={obj.image} title={obj.title} category={obj.category} />
+                            <KudosBoard key={obj.id} id={obj.id} image={obj.image} title={obj.title} category={obj.category} author={obj.author} />
                         )
                     })
                 }

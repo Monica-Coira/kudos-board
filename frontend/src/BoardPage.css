@@ -1,6 +1,8 @@
 .board-page {
     margin: 0 auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .back-button {
@@ -14,6 +16,13 @@
 
 .board-page-title {
     font-size: 40px;
+}
+
+.board-page-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .board-page-container {
