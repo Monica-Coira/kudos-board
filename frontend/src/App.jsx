@@ -4,8 +4,33 @@ import SearchForm from './SearchForm';
 import SortForm from './SortForm';
 import CreateBoard from './CreateBoard';
 import BoardList from './BoardList.jsx';
+import { useState, useEffect } from 'react';
 
 const App = () => {
+  const [boardData, setBoardData] = useState([])
+
+  const fetchData = async (parameter) => {
+    try {
+      const response = await fetch(`http://localhost:3000/${parameter}`);
+      if (!response.ok){
+        throw new Error('Not able to fetch data.')
+      }
+      const data = await response.json();
+      setBoardData(data);
+    }
+    catch {
+      console.log("Error fetching data.")
+    }
+  }
+
+  const fetchBoardData = async () => {
+    fetchData("boards/");
+  }
+
+  useEffect(() => {
+    fetchBoardData();
+  })
+
   return (
     <div className="app">
       <header className="app-header">
