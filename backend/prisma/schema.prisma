@@ -16,10 +16,9 @@ datasource db {
 model Board {
   id          Int            @id @default(autoincrement())
   title       String
-  description String
   category    String
   author      String?
-  giphyLink   String?
+  image       String?
   cards       Card[]
 
   @@map("boards")

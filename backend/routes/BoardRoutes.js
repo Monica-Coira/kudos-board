@@ -16,55 +16,38 @@ router.get('/:boardId', async (req, res) => {
     res.json(board);
 })
 
-router.get('/:boardId/:cardId', async (req, res) => {
-    const boardId = parseInt(req.params.boardId)
-    const board = await prisma.board.findUnique({
-        where: { id: parseInt(boardId) },
+router.get('/search/:title', async (req, res) => {
+    const boardTitle = parseInt(req.params.title)
+    const board = await prisma.board.findMany({
+        where: { title: parseInt(boardTitle) },
     });
-    const cardId = parseInt(req.params.cardId)
-    const card = await prisma.board.card.findUnique({
-        where: { id: parseInt(cardId) },
+    res.json(board);
+})
+
+router.get('/sort/:category', async (req, res) => {
+    const boardCategory = parseInt(req.params.category)
+    const board = await prisma.board.findMany({
+        where: { category: parseInt(boardCategory) },
     });
-    res.json(card);
+    res.json(board);
 })
 
 router.post('/', async (req, res) => {
-    // if (!req.body.name || !req.body.type) {
-    //     return res.status(400).send('Name and type are required.')
-    // }
-    const { id, title, description, category, author, giphyLink, cards } = req.body
+    if (!req.body.title || !req.body.category) {
+        return res.status(400).send('Title and category are required.')
+    }
+    const { id, title, category, author, image, cards } = req.body
     const newBoard = await prisma.board.create({
         data: {
         id,
         title,
-        description,
         category,
         author,
-        giphyLink,
+        image,
         cards
         }
     })
     res.json(newBoard)
-})
-
-router.post('/boardPage', async (req, res) => {
-    // if (!req.body.name || !req.body.type) {
-    //     return res.status(400).send('Name and type are required.')
-    // }
-    const { id, board_id, message, giphyLink, upvotes, author, pinned, board } = req.body
-    const newCard = await prisma.card.create({
-        data: {
-        id,
-        board_id,
-        message,
-        giphyLink,
-        upvotes,
-        author, 
-        pinned, 
-        board
-        }
-    })
-    res.json(newCard)
 })
 
 router.put('/:boardId', async (req, res) => {
