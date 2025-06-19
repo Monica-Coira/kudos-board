@@ -8,10 +8,13 @@ import { useState, useEffect } from 'react';
 
 const App = () => {
   const [boardData, setBoardData] = useState([])
+  const [deletedBoard, setDeletedBoard] = useState([])
 
-  const fetchData = async (parameter, dataSetter) => {
+  const fetchData = async (parameter, dataSetter, crudMethod = "GET") => {
     try {
-      const response = await fetch(`http://localhost:3000/${parameter}`);
+      const response = await fetch(`http://localhost:3000/${parameter}`, {
+        method: crudMethod
+      });
       if (!response.ok){
         throw new Error('Not able to fetch data.')
       }
@@ -39,6 +42,11 @@ const App = () => {
     fetchData(`boards/sort?category=${chosenCategory}`, setBoardData);
   }
 
+  const deleteBoard = async (boardId) => {
+    await fetchData(`boards/${boardId}`, setDeletedBoard, "DELETE");
+    fetchBoardData();
+  }
+
   useEffect(() => {
     fetchBoardData();
   }, [])
@@ -55,7 +63,7 @@ const App = () => {
       </header>
 
       <main className="app-main">
-        <BoardList data={boardData} />
+        <BoardList data={boardData} deleteBoard={deleteBoard} />
       </main>
 
       <footer>

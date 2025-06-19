@@ -1,11 +1,15 @@
 import './KudosBoard.css'
 import { useNavigate } from 'react-router-dom'; 
 
-const KudosBoard = ({id, image, title, category, author}) => {
+const KudosBoard = ({id, image, title, category, author, deleteBoard}) => {
     const navigate = useNavigate();
 
     const handleViewBoard = () => {
         navigate(`/boardpage/${id}`);
+    }
+
+    const handleDelete = () => {
+        deleteBoard(id);
     }
 
     return (
@@ -16,7 +20,7 @@ const KudosBoard = ({id, image, title, category, author}) => {
             <p className="kudos-board-author">Author: {author}</p>
             <div className="kudos-board-buttons">
                 <button className="view-board-button" onClick={handleViewBoard}>View Board</button>
-                <button className="delete-board-button">Delete Board</button>
+                <button className="delete-board-button" onClick={handleDelete}>Delete Board</button>
             </div>
         </div>
     )
