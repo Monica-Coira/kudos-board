@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import BoardCard from './BoardCard';
-import boardData from './data';
 import './BoardPage.css'
 import CreateCard from './CreateCard';
 import { useState, useEffect } from 'react';
@@ -8,6 +7,7 @@ import { useState, useEffect } from 'react';
 const BoardPage = () => {
     const navigate = useNavigate();
     const [cardData, setCardData] = useState([])
+    const [boardTitle, setBoardTitle] = useState([])
     const {boardId} = useParams();
 
     const handleBackButton = () => {
@@ -32,15 +32,20 @@ const BoardPage = () => {
         fetchData(`cards/${boardId}`, setCardData);
     }
 
+    const fetchBoardTitle = () => {
+        fetchData(`cards/getTitle/${boardId}`, setBoardTitle);
+    }
+
     useEffect(() => {
         fetchCardData();
+        fetchBoardTitle();
     })
 
     return (
         <div className="board-page">
             <header>
                 <button className="back-button" onClick={handleBackButton}>{"←"}</button>
-                <h1 className="board-page-title">{boardData[0].title}</h1>
+                <h1 className="board-page-title">{boardTitle[0] ? boardTitle[0].title : "Loading..."}</h1>
             </header>
             <main>
                 <div className="board-page-container">
