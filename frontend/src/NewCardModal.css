@@ -49,8 +49,26 @@
     cursor: pointer;
 }
 
-.modal-header {
+.giphy-display {
     display: flex;
-    align-items: flex-start;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.giphy-display img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.giphy-display img:hover {
+    transform: scale(1.05);
+}
+
+.selected-gif {
+    border: 3px solid black;
+    box-shadow: 0 12px 20px rgba(0,0,0,0.15);
 }

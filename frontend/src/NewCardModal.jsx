@@ -35,6 +35,8 @@ const NewCardModal = ({cardModalIsOpen, onCardModalClose, createCard}) => {
         onCardModalClose();
     }
     const handleCardModalClose = () => {
+        setGiphySearchQuery("");
+        setPossibleGifs([]);
         onCardModalClose();
     }
 
@@ -59,7 +61,9 @@ const NewCardModal = ({cardModalIsOpen, onCardModalClose, createCard}) => {
                     <div className="giphy-display">
                         {
                             possibleGifs.map((obj) => {
-                                <img src={obj.images.url} alt={obj.title} onClick={selectGif(obj)}/>
+                                return (
+                                    <img key={obj.id} src={obj.images.original.url} alt={obj.title} onClick={() => selectGif(obj.images.original.url)} className={cardGiphyLink === obj.images.original.url ? "selected-gif" : ""}/>
+                                )
                             })
                         }
                     </div>

@@ -45,12 +45,12 @@ const BoardPage = () => {
         await fetchData(`cards/upvote/${cardId}`, setCardData, "PUT");
     }
 
-    const createCard = async (cardMessage, cardGiphyLink, cardAuthor) => {
+    const createCard = async ({cardMessage, cardGiphyLink, cardAuthor}) => {
         try {
             const newCardData = {
-                board_id: boardId,
+                board_id: Number(boardId),
                 message: cardMessage,
-                giphyLink: cardGiphyLink.images.url,
+                giphyLink: cardGiphyLink,
                 author: cardAuthor,
                 upvotes: 0,
                 pinned: false
