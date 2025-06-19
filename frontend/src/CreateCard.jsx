@@ -1,8 +1,12 @@
 import './CreateCard.css'
 
-const CreateCard = () => {
+const CreateCard = ({ setCardModalIsOpen }) => {
+    const handleCardModalOpen = () => {
+        setCardModalIsOpen(true);
+    }
+
     return (
-        <button className="create-card-button">Create a Card</button>
+        <button className="create-card-button" onClick={handleCardModalOpen}>Create a Card</button>
     )
 }
 

@@ -3,6 +3,7 @@ import BoardCard from './BoardCard';
 import './BoardPage.css'
 import CreateCard from './CreateCard';
 import { useState, useEffect } from 'react';
+import NewCardModal from './NewCardModal';
 
 const BoardPage = () => {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ const BoardPage = () => {
     const [boardTitle, setBoardTitle] = useState([])
     const {boardId} = useParams();
     const [upvotedCard, setUpvotedCard] = useState([])
+    const [cardModalIsOpen, setCardModalIsOpen] = useState(false)
 
     const handleBackButton = () => {
         navigate('/'); 
@@ -43,6 +45,38 @@ const BoardPage = () => {
         await fetchData(`cards/upvote/${cardId}`, setCardData, "PUT");
     }
 
+    const createCard = async (cardMessage, cardGiphyLink, cardAuthor) => {
+        try {
+            const newCardData = {
+                board_id: boardId,
+                message: cardMessage,
+                giphyLink: cardGiphyLink.images.url,
+                author: cardAuthor,
+                upvotes: 0,
+                pinned: false
+            }
+            const response = await fetch("http://localhost:3000/cards/", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newCardData)
+            });
+            if (!response.ok){
+                throw new Error("Not able to create new card.")
+            }
+            const data = await response.json();
+        }
+        catch {
+            console.log("Error creating a new card.")
+        }
+        fetchCardData();
+    }
+
+    const onCardModalClose = () => {
+        setCardModalIsOpen(false);
+    }
+
     useEffect(() => {
         fetchCardData();
         fetchBoardTitle();
@@ -56,7 +90,8 @@ const BoardPage = () => {
             </header>
             <main>
                 <div className="board-page-container">
-                    <CreateCard />
+                    <CreateCard setCardModalIsOpen={setCardModalIsOpen} />
+                    <NewCardModal cardModalIsOpen={cardModalIsOpen} onCardModalClose={onCardModalClose} createCard={createCard}/>
                     <div className="board-page-cards">
                     {
                         cardData.map(obj => {

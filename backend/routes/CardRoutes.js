@@ -70,23 +70,22 @@ router.put('/upvote/:cardId', async (req, res) => {
     res.json(upvotedCards);
 })
 
-router.put('/:cardId', async (req, res) => {
-    const { cardId } = req.params
-    const { id, board_id, message, giphyLink, upvotes, author, pinned, board } = req.body
-    const updatedCard = await prisma.card.update({
-        where: { id: parseInt(cardId) },
+router.post('/', async (req, res) => {
+    if (!req.body.message || !req.body.giphyLink) {
+        return res.status(400).send('Message and GIPHY link are required.')
+    }
+    const { board_id, message, giphyLink, upvotes, author, pinned } = req.body
+    const newCard = await prisma.card.create({
         data: {
-        id,
         board_id,
         message,
         giphyLink,
         upvotes,
         author,
-        pinned,
-        board
+        pinned
         }
     })
-    res.json(updatedCard)
+    res.json(newCard)
 })
 
 router.delete('/:cardId', async (req, res) => {
