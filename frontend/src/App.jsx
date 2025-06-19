@@ -10,6 +10,7 @@ import NewBoardModal from './NewBoardModal.jsx';
 const App = () => {
   const [boardData, setBoardData] = useState([])
   const [deletedBoard, setDeletedBoard] = useState([])
+  const [upvotedCard, setUpvotedCard] = useState([])
   const [boardModalIsOpen, setBoardModalIsOpen] = useState(false)
 
   const fetchData = async (parameter, dataSetter, crudMethod = "GET") => {

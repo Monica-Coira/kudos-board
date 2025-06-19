@@ -52,6 +52,24 @@ router.post('/', async (req, res) => {
     res.json(newCard)
 })
 
+router.put('/upvote/:cardId', async (req, res) => {
+    const cardId = parseInt(req.params.cardId);
+    const upvotedCard = await prisma.card.update({
+        where: { id: cardId },
+        data: {
+            upvotes: {
+                increment: 1,
+            },
+        },
+    })
+    const upvotedCards = await prisma.card.findMany({
+        orderBy: {
+            id: "desc",
+        }
+    })
+    res.json(upvotedCards);
+})
+
 router.put('/:cardId', async (req, res) => {
     const { cardId } = req.params
     const { id, board_id, message, giphyLink, upvotes, author, pinned, board } = req.body

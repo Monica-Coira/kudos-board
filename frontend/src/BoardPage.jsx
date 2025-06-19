@@ -9,14 +9,17 @@ const BoardPage = () => {
     const [cardData, setCardData] = useState([])
     const [boardTitle, setBoardTitle] = useState([])
     const {boardId} = useParams();
+    const [upvotedCard, setUpvotedCard] = useState([])
 
     const handleBackButton = () => {
         navigate('/'); 
     };
 
-    const fetchData = async (parameter, dataSetter) => {
+    const fetchData = async (parameter, dataSetter, crudMethod = "GET") => {
         try {
-        const response = await fetch(`http://localhost:3000/${parameter}`);
+        const response = await fetch(`http://localhost:3000/${parameter}`, {
+            method: crudMethod
+        });
         if (!response.ok){
             throw new Error('Not able to fetch data.')
         }
@@ -36,10 +39,14 @@ const BoardPage = () => {
         fetchData(`cards/getTitle/${boardId}`, setBoardTitle);
     }
 
+    const upvoteCard = async (cardId) => {
+        await fetchData(`cards/upvote/${cardId}`, setCardData, "PUT");
+    }
+
     useEffect(() => {
         fetchCardData();
         fetchBoardTitle();
-    })
+    }, [])
 
     return (
         <div className="board-page">
@@ -54,7 +61,7 @@ const BoardPage = () => {
                     {
                         cardData.map(obj => {
                             return (
-                                <BoardCard cardDescription={obj.message} cardImage={obj.giphyLink} upvotes={obj.upvotes} cardAuthor={obj.author} />
+                                <BoardCard cardDescription={obj.message} cardImage={obj.giphyLink} upvotes={obj.upvotes} cardAuthor={obj.author} cardId={obj.id} upvoteCard={upvoteCard} />
                             )
                         })
                     }
