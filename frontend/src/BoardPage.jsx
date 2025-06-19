@@ -10,7 +10,7 @@ const BoardPage = () => {
     const [cardData, setCardData] = useState([])
     const [boardTitle, setBoardTitle] = useState([])
     const {boardId} = useParams();
-    const [upvotedCard, setUpvotedCard] = useState([])
+    const [deletedCard, setDeletedCard] = useState([])
     const [cardModalIsOpen, setCardModalIsOpen] = useState(false)
 
     const handleBackButton = () => {
@@ -42,7 +42,7 @@ const BoardPage = () => {
     }
 
     const upvoteCard = async (cardId) => {
-        await fetchData(`cards/upvote/${cardId}`, setCardData, "PUT");
+        await fetchData(`cards/upvote/${boardId}/${cardId}`, setCardData, "PUT");
     }
 
     const createCard = async ({cardMessage, cardGiphyLink, cardAuthor}) => {
@@ -77,6 +77,11 @@ const BoardPage = () => {
         setCardModalIsOpen(false);
     }
 
+    const deleteCard = async (cardId) => {
+        await fetchData(`cards/${cardId}`, setDeletedCard, "DELETE");
+        fetchCardData();
+    }
+
     useEffect(() => {
         fetchCardData();
         fetchBoardTitle();
@@ -96,7 +101,7 @@ const BoardPage = () => {
                     {
                         cardData.map(obj => {
                             return (
-                                <BoardCard cardDescription={obj.message} cardImage={obj.giphyLink} upvotes={obj.upvotes} cardAuthor={obj.author} cardId={obj.id} upvoteCard={upvoteCard} />
+                                <BoardCard cardDescription={obj.message} cardImage={obj.giphyLink} upvotes={obj.upvotes} cardAuthor={obj.author} cardId={obj.id} upvoteCard={upvoteCard} deleteCard={deleteCard}/>
                             )
                         })
                     }

@@ -1,9 +1,13 @@
 import './BoardCard.css'
 import { useState } from 'react';
 
-const BoardCard = ({cardImage, cardDescription, upvotes, cardAuthor, cardId, upvoteCard}) => {
+const BoardCard = ({cardImage, cardDescription, upvotes, cardAuthor, cardId, upvoteCard, deleteCard}) => {
     const handleUpvote = () => {
         upvoteCard(cardId);
+    }
+
+    const handleDeleteCard = () => {
+        deleteCard(cardId);
     }
 
     return (
@@ -13,7 +17,7 @@ const BoardCard = ({cardImage, cardDescription, upvotes, cardAuthor, cardId, upv
             <p className="board-card-author">Author: {cardAuthor}</p>
             <div className="board-card-buttons">
                 <button className="upvote-button" onClick={handleUpvote}>Upvotes: {upvotes}</button>
-                <button className="board-card-delete-button">Delete</button>
+                <button className="board-card-delete-button" onClick={handleDeleteCard}>Delete</button>
             </div>
         </div>
     )
