@@ -31,6 +31,14 @@ const App = () => {
     fetchData(`boards/search?title=${searchQuery}`, setBoardData);
   }
 
+  const fetchSortData = async (chosenCategory) => {
+    if (chosenCategory === "All"){
+      fetchBoardData();
+      return;
+    }
+    fetchData(`boards/sort?category=${chosenCategory}`, setBoardData);
+  }
+
   useEffect(() => {
     fetchBoardData();
   }, [])
@@ -41,7 +49,7 @@ const App = () => {
         <h1 className="app-title">Kudos Board</h1>
         <section className="header-forms">
           <SearchForm fetchSearchData={fetchSearchData} fetchBoardData={fetchBoardData}/>
-          <SortForm />
+          <SortForm fetchSortData={fetchSortData}/>
           <CreateBoard />
         </section>
       </header>

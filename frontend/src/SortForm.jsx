@@ -1,15 +1,26 @@
 import './SortForm.css'
+import { useState, useEffect } from 'react';
 
-const SortForm = () => {
+const SortForm = ({ fetchSortData }) => {
+    const [chosenCategory, setChosenCategory] = useState("")
+
+    const handleSortChange = (event) => {
+        setChosenCategory((prev) => event.target.value);
+    }
+
+    useEffect(() => {
+        fetchSortData(chosenCategory);
+    }, [chosenCategory])
+
     return (
-        <div>
-            <select name="sort" className="sort-dropdown">
+        <div className="sort-dropdown">
+            <select name="sort" onChange={handleSortChange}>
                 <option disabled selected>Sort By Category</option>
-                <option value="all">All</option>
-                <option value="recent">Recent</option>
-                <option value="celebration">Celebration</option>
-                <option value="thankYou">Thank You</option>
-                <option value="inspiration">Inspiration</option>
+                <option value="All">All</option>
+                <option value="Recent">Recent</option>
+                <option value="Celebration">Celebration</option>
+                <option value="Thank You">Thank You</option>
+                <option value="Inspiration">Inspiration</option>
             </select>
         </div>
     );
