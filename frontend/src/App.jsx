@@ -27,16 +27,20 @@ const App = () => {
     fetchData("boards/", setBoardData);
   }
 
+  const fetchSearchData = async (searchQuery) => {
+    fetchData(`boards/search?title=${searchQuery}`, setBoardData);
+  }
+
   useEffect(() => {
     fetchBoardData();
-  })
+  }, [])
 
   return (
     <div className="app">
       <header className="app-header">
         <h1 className="app-title">Kudos Board</h1>
         <section className="header-forms">
-          <SearchForm />
+          <SearchForm fetchSearchData={fetchSearchData} fetchBoardData={fetchBoardData}/>
           <SortForm />
           <CreateBoard />
         </section>
