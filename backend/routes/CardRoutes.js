@@ -3,6 +3,22 @@ const { PrismaClient } = require('@prisma/client')
 const router = express.Router()
 const prisma = new PrismaClient();
 
+router.get('/getTitle/:boardId', async (req, res) => {
+    const boardId = parseInt(req.params.boardId)
+    const board = await prisma.board.findMany({
+        where: { id : parseInt(boardId) },
+    });
+    res.json(board);
+})
+
+router.get('/:boardId', async (req, res) => {
+    const boardId = parseInt(req.params.boardId)
+    const cards = await prisma.card.findMany({
+        where: { board_id : parseInt(boardId) },
+    });
+    res.json(cards);
+})
+
 router.get('/', async (req, res) => {
     const cards = await prisma.card.findMany();
     res.json(cards);
