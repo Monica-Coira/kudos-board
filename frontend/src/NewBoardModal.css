@@ -58,6 +58,12 @@
     border-radius: 10px;
 }
 
+.image-label {
+    font-size: 12px;
+    align-items: flex-start;
+    display: flex;
+}
+
 .close {
     color: #aaa;
     float: right;
