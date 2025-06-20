@@ -9,9 +9,21 @@
 }
 
 .search-button {
-    background-color: #00D8D8;
+    background-color: #068484;
+    color: white;
+}
+
+.search-button-dark {
+    background-color: #b4ced2;
+    color: black;
 }
 
 .clear-button {
-    background-color: #00D8D8;
+    background-color: #068484;
+    color: white;
+}
+
+.clear-button-dark {
+    background-color: #b4ced2;
+    color: black;
 }

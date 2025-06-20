@@ -27,15 +27,47 @@
 }
 
 .upvote-button {
-    background-color: #00D8D8;
+    background-color: #068484;
     cursor: pointer;
+    color: white;
 }
 
 .board-card-delete-button {
-    background-color: #00D8D8;
+    background-color: #068484;
     cursor: pointer;
+    color: white;
+}
+
+.upvote-button-dark {
+    background-color: #b4ced2;
+    cursor: pointer;
+    color: black;
+}
+
+.board-card-delete-button-dark {
+    background-color: #b4ced2;
+    cursor: pointer;
+    color: black;
 }
 
 .board-card:hover {
     transform: scale(1.03) translateY(-2px);
+}
+
+.pinned-button {
+    background-color: #FF746C;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.pin-button {
+    background-color: #068484;
+    cursor: pointer;
+    color: white;
+}
+
+.pin-button-dark {
+    background-color: #b4ced2;
+    cursor: pointer;
+    color: black;
 }

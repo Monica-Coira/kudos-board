@@ -1,7 +1,7 @@
 import './SearchForm.css'
 import { useState } from 'react'
 
-const SearchForm = ({ fetchSearchData, fetchBoardData }) => {
+const SearchForm = ({ fetchSearchData, fetchBoardData, onDarkMode }) => {
     const [searchQuery, setSearchQuery] = useState("")
 
     const handleSearchChange = (event) => {
@@ -26,8 +26,8 @@ const SearchForm = ({ fetchSearchData, fetchBoardData }) => {
     return (
         <div className="search-bar">
             <input type="text" value={searchQuery} onChange={handleSearchChange} onKeyDown={handleEnterKey} id="searchInput" className="search-input" placeholder="Search boards..."></input>
-            <button className="search-button" onClick={handleSearch}>Search</button>
-            <button className="clear-button" onClick={handleClear}>Clear</button>
+            <button className={onDarkMode ? "search-button-dark" : "search-button"} onClick={handleSearch}>Search</button>
+            <button className={onDarkMode ? "clear-button-dark" : "clear-button"} onClick={handleClear}>Clear</button>
         </div>
     );
 }

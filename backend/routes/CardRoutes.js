@@ -15,9 +15,10 @@ router.get('/:boardId', async (req, res) => {
     const boardId = parseInt(req.params.boardId)
     const cards = await prisma.card.findMany({
         where: { board_id : parseInt(boardId) },
-        orderBy: {
-            id: "desc",
-        }
+        orderBy: [
+            { pinned: "desc" },
+            { id: "desc" }
+        ]
     });
     res.json(cards);
 })
@@ -68,11 +69,50 @@ router.put('/upvote/:boardId/:cardId', async (req, res) => {
     })
     const upvotedCards = await prisma.card.findMany({
         where: { board_id: boardId },
-        orderBy: {
-            id: "desc",
-        }
+        orderBy: [
+            { pinned: "desc" },
+            { id: "desc" }
+        ]
     })
     res.json(upvotedCards);
+})
+
+router.put('/pin/:boardId/:cardId', async (req, res) => {
+    const cardId = parseInt(req.params.cardId);
+    const boardId = parseInt(req.params.boardId);
+    const pinnedCard = await prisma.card.update({
+        where: { id: cardId },
+        data: {
+            pinned: true
+        }
+    })
+    const updatedCards = await prisma.card.findMany({
+        where: { board_id: boardId },
+        orderBy: [
+            { pinned: "desc" },
+            { id: "desc" }
+        ]
+    })
+    res.json(updatedCards);
+})
+
+router.put('/unpin/:boardId/:cardId', async (req, res) => {
+    const cardId = parseInt(req.params.cardId);
+    const boardId = parseInt(req.params.boardId);
+    const pinnedCard = await prisma.card.update({
+        where: { id: cardId },
+        data: {
+            pinned: false
+        }
+    })
+    const updatedCards = await prisma.card.findMany({
+        where: { board_id: boardId },
+        orderBy: [
+            { pinned: "desc" },
+            { id: "desc" }
+        ]
+    })
+    res.json(updatedCards);
 })
 
 router.post('/', async (req, res) => {

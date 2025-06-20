@@ -1,13 +1,13 @@
 import './CreateBoard.css'
 import { useState, useEffect } from 'react'
 
-const CreateBoard = ({ setBoardModalIsOpen }) => {
+const CreateBoard = ({ setBoardModalIsOpen, onDarkMode }) => {
     const handleCreateBoard = () => {
         setBoardModalIsOpen(true);
     }
 
     return (
-        <button className="create-board-button" onClick={handleCreateBoard}>Create a New Board</button>
+        <button className={onDarkMode ? "create-board-button-dark" : "create-board-button"} onClick={handleCreateBoard}>Create a New Board</button>
     )
 }
 

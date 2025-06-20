@@ -5,7 +5,7 @@ const NewBoardModal = ({boardModalIsOpen, onModalClose, createBoard}) => {
     const [title, setTitle] = useState("")
     const [category, setCategory] = useState("")
     const [author, setAuthor] = useState("")
-    const [image, setImage] = useState("https://picsum.photos/200/260")
+    const [image, setImage] = useState(`https://picsum.photos/id/${Math.floor(Math.random() * 100)}/200/260`)
 
     if (!boardModalIsOpen){
         return null;
@@ -16,7 +16,6 @@ const NewBoardModal = ({boardModalIsOpen, onModalClose, createBoard}) => {
         setTitle("");
         setCategory("");
         setAuthor("");
-        setImage("");
         onModalClose();
     }
     const handleModalClose = () => {

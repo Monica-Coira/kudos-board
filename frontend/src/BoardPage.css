@@ -6,6 +6,34 @@
     min-height: 100vh;
 }
 
+.board-page-dark {
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: black;
+    color: white;
+}
+
+.mode-button {
+  font-size: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 30px;
+  background-color: #068484;
+}
+
+.mode-button-dark {
+  font-size: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 30px;
+  background-color: #b4ced2;
+}
+
 .board-page-cards {
     display: flex;
     flex-wrap: wrap;
@@ -34,12 +62,24 @@
 }
 
 .back-button {
+    background-color: #068484;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 30px;
+    font-size: 20px;
+    color: white;
+}
+
+.back-button-dark {
     background-color: #00D8D8;
     position: absolute;
     top: 0;
     left: 0;
     margin: 30px;
     font-size: 20px;
+    background-color: #b4ced2;
+    color: black;
 }
 
 .board-page-title {

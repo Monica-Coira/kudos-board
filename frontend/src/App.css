@@ -12,11 +12,39 @@
   flex-direction: column;
 }
 
+.app-dark {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+}
+
 .app-title {
   font-size: 40px;
   margin-top: 20px;
   margin-bottom: 10px;
   font-weight: 500;
+}
+
+.mode-button {
+  font-size: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 30px;
+  background-color: #068484;
+}
+
+.mode-button-dark {
+  font-size: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 30px;
+  background-color: #b4ced2;
 }
 
 .app-header {
@@ -26,6 +54,17 @@
   color: black;
   width: 100%;
   padding: 20px;
+  background-color: #ededed;
+}
+
+.app-header-dark {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  color: white;
+  width: 100%;
+  padding: 20px;
+  background-color: black;
 }
 
 .header-forms {
@@ -52,12 +91,22 @@
   flex: 1;
 }
 
-footer {
+.app-footer {
   display: flex;
-  background-color: #00D8D8;
+  background-color: #068484;
+  color: white;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  margin: auto;
+}
+
+.app-footer-dark {
+  display: flex;
+  background-color: #b4ced2;
   color: black;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   margin: auto;
 }

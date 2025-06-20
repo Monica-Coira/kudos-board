@@ -21,11 +21,23 @@
 }
 
 .view-board-button {
-    background-color: #00D8D8;
+    background-color: #068484;
+    color: white;
+}
+
+.view-board-button-dark {
+    background-color: #b4ced2;
+    color: black;
 }
 
 .delete-board-button {
-    background-color: #00D8D8;
+    background-color: #068484;
+    color: white;
+}
+
+.delete-board-button-dark {
+    background-color: #b4ced2;
+    color: black;
 }
 
 .kudos-board:hover {

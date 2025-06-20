@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import BoardCard from './BoardCard';
 import './BoardPage.css'
 import CreateCard from './CreateCard';
@@ -12,9 +12,12 @@ const BoardPage = () => {
     const {boardId} = useParams();
     const [deletedCard, setDeletedCard] = useState([])
     const [cardModalIsOpen, setCardModalIsOpen] = useState(false)
+    const location = useLocation();
+    const { modeData } = location.state || {};
+    const [onDarkMode, setOnDarkMode] = useState(modeData);
 
     const handleBackButton = () => {
-        navigate('/'); 
+        navigate('/', {state: {modeData: onDarkMode}}); 
     };
 
     const fetchData = async (parameter, dataSetter, crudMethod = "GET") => {
@@ -43,6 +46,14 @@ const BoardPage = () => {
 
     const upvoteCard = async (cardId) => {
         await fetchData(`cards/upvote/${boardId}/${cardId}`, setCardData, "PUT");
+    }
+
+    const pinCard = async (cardId) => {
+        await fetchData(`cards/pin/${boardId}/${cardId}`, setCardData, "PUT");
+    }
+
+    const unpinCard = async (cardId) => {
+        await fetchData(`cards/unpin/${boardId}/${cardId}`, setCardData, "PUT");
     }
 
     const createCard = async ({cardMessage, cardGiphyLink, cardAuthor}) => {
@@ -82,19 +93,29 @@ const BoardPage = () => {
         fetchCardData();
     }
 
+    const handleChangeMode = () => {
+        if (!onDarkMode){
+            setOnDarkMode(true);
+        }
+        else {
+            setOnDarkMode(false);
+        }
+    }
+
     useEffect(() => {
         fetchCardData();
         fetchBoardTitle();
     }, [])
 
     return (
-        <div className="board-page">
+        <div className={onDarkMode ? "board-page-dark" : "board-page"}>
             <header className="board-page-header">
-                <button className="back-button" onClick={handleBackButton}>{"←"}</button>
+                <button className={onDarkMode ? "back-button-dark" : "back-button"} onClick={handleBackButton}>{"←"}</button>
+                <button className={onDarkMode ? "mode-button-dark" : "mode-button"} onClick={handleChangeMode}>💡</button>
                 <h2 className="board-page-kudos-header">Kudos Board</h2>
                 <div className="board-page-second-header">
                     <h1 className="board-page-title">{boardTitle[0] ? boardTitle[0].title : "Loading..."}</h1>
-                    <CreateCard setCardModalIsOpen={setCardModalIsOpen} />
+                    <CreateCard setCardModalIsOpen={setCardModalIsOpen} onDarkMode={onDarkMode}/>
                 </div>
             </header>
             <main>
@@ -104,14 +125,14 @@ const BoardPage = () => {
                     {
                         cardData.map(obj => {
                             return (
-                                <BoardCard cardDescription={obj.message} cardImage={obj.giphyLink} upvotes={obj.upvotes} cardAuthor={obj.author} cardId={obj.id} upvoteCard={upvoteCard} deleteCard={deleteCard}/>
+                                <BoardCard cardDescription={obj.message} cardImage={obj.giphyLink} upvotes={obj.upvotes} cardAuthor={obj.author} cardId={obj.id} cardPinned={obj.pinned} upvoteCard={upvoteCard} deleteCard={deleteCard} pinCard={pinCard} unpinCard={unpinCard} onDarkMode={onDarkMode}/>
                             )
                         })
                     }
                     </div>
                 </div>
             </main>
-            <footer>
+            <footer className={onDarkMode ? "app-footer-dark" : "app-footer"}>
                 <p>© Monica Coira. All Rights Reserved.</p>
             </footer>
         </div>

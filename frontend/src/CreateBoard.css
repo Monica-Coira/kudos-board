@@ -1,3 +1,9 @@
 .create-board-button {
-    background-color: #00D8D8;
+    background-color: #068484;
+    color: white;
+}
+
+.create-board-button-dark {
+    background-color: #b4ced2;
+    color: black;
 }

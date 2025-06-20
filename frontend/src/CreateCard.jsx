@@ -1,12 +1,12 @@
 import './CreateCard.css'
 
-const CreateCard = ({ setCardModalIsOpen }) => {
+const CreateCard = ({ setCardModalIsOpen, onDarkMode }) => {
     const handleCardModalOpen = () => {
         setCardModalIsOpen(true);
     }
 
     return (
-        <button className="create-card-button" onClick={handleCardModalOpen}>Create a Card</button>
+        <button className={onDarkMode ? "create-card-button-dark" : "create-card-button"} onClick={handleCardModalOpen}>Create a Card</button>
     )
 }
 
