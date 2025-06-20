@@ -100,6 +100,10 @@ const App = () => {
     setOnDarkMode(modeData);
   }, [location.state])
 
+  useEffect(() => {
+    localStorage.setItem('onDarkMode', onDarkMode);
+  }, [onDarkMode])
+
   return (
     <div className={onDarkMode ? "app-dark" : "app"}>
       <header className={onDarkMode ? "app-header-dark" : "app-header"}>
