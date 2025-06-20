@@ -4,7 +4,11 @@ const router = express.Router()
 const prisma = new PrismaClient();
 
 router.get('/', async (req, res) => {
-    const boards = await prisma.board.findMany();
+    const boards = await prisma.board.findMany({
+        orderBy: {
+            id: "desc",
+        }
+    });
     res.json(boards);
 })
 

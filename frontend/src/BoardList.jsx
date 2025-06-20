@@ -1,4 +1,5 @@
 import KudosBoard from "./KudosBoard";
+import './BoardList.css'
 
 const BoardList = ({data, deleteBoard}) => {
     return (

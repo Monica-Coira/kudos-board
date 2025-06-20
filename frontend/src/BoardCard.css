@@ -1,18 +1,21 @@
 .board-card {
     text-align: center;
     padding: 15px;
-    width: calc(100% / 6);
-    margin: 35px;
-    display: inline-block;
+    width: 200px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: 1px solid black;
     box-shadow: 0 12px 20px rgba(0,0,0,0.15);
     border-radius: 10px;
+    padding-top: 20px;
 }
 
 .board-card-image {
     display: flex;
     width: 100%;
-    height: auto;
+    height: 250px;
     border-radius: 10px;
 }
 
@@ -25,10 +28,12 @@
 
 .upvote-button {
     background-color: #00D8D8;
+    cursor: pointer;
 }
 
 .board-card-delete-button {
     background-color: #00D8D8;
+    cursor: pointer;
 }
 
 .board-card:hover {

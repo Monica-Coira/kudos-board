@@ -89,13 +89,16 @@ const BoardPage = () => {
 
     return (
         <div className="board-page">
-            <header>
+            <header className="board-page-header">
                 <button className="back-button" onClick={handleBackButton}>{"←"}</button>
-                <h1 className="board-page-title">{boardTitle[0] ? boardTitle[0].title : "Loading..."}</h1>
+                <h2 className="board-page-kudos-header">Kudos Board</h2>
+                <div className="board-page-second-header">
+                    <h1 className="board-page-title">{boardTitle[0] ? boardTitle[0].title : "Loading..."}</h1>
+                    <CreateCard setCardModalIsOpen={setCardModalIsOpen} />
+                </div>
             </header>
             <main>
                 <div className="board-page-container">
-                    <CreateCard setCardModalIsOpen={setCardModalIsOpen} />
                     <NewCardModal cardModalIsOpen={cardModalIsOpen} onCardModalClose={onCardModalClose} createCard={createCard}/>
                     <div className="board-page-cards">
                     {

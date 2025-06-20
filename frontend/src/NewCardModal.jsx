@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './NewCardModal.css'
 import { API_KEY } from './apiConfig.js'
 
@@ -32,9 +32,15 @@ const NewCardModal = ({cardModalIsOpen, onCardModalClose, createCard}) => {
         setCardMessage("");
         setCardGiphyLink("");
         setCardAuthor("");
+        setGiphySearchQuery("");
+        setPossibleGifs([]);
+        onCardModalClose();
         onCardModalClose();
     }
     const handleCardModalClose = () => {
+        setCardMessage("");
+        setCardGiphyLink("");
+        setCardAuthor("");
         setGiphySearchQuery("");
         setPossibleGifs([]);
         onCardModalClose();
@@ -51,11 +57,11 @@ const NewCardModal = ({cardModalIsOpen, onCardModalClose, createCard}) => {
                     <span className="close" onClick={handleCardModalClose}>&times;</span>
                 </div>
                 <h3>Create a New Card</h3>
-                <form onSubmit={handleNewCardSubmit}>
+                <form onSubmit={handleNewCardSubmit} className="new-card-modal-form">
                     <input type="text" placeholder="Message" value={cardMessage} onChange={(event) => setCardMessage(event.target.value)}/>
-                    <input type="text" placeholder="Author" value={cardAuthor} onChange={(event) => setCardAuthor(event.target.value)}/>
+                    <input type="text" placeholder="Author (optional)" value={cardAuthor} onChange={(event) => setCardAuthor(event.target.value)}/>
                     <div className="giphy-search">
-                        <input type="text" placeholder="Search for a GIF" value={giphySearchQuery} onChange={(event) => setGiphySearchQuery(event.target.value)}/>
+                        <input type="text" placeholder="Search for a GIF" value={giphySearchQuery} onChange={(event) => setGiphySearchQuery(event.target.value)} className="giphy-search-bar"/>
                         <button type="button" className="giphy-search-button" onClick={fetchPossibleGifs}>Search</button>
                     </div>
                     <div className="giphy-display">
@@ -68,7 +74,7 @@ const NewCardModal = ({cardModalIsOpen, onCardModalClose, createCard}) => {
                         }
                     </div>
                     <div className="new-card-modal-button">
-                        <button type="submit">Submit</button>
+                        <button type="submit" className="new-card-modal-submit">Submit</button>
                     </div>
                 </form>
             </div>

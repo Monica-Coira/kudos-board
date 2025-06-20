@@ -30,13 +30,13 @@ const NewBoardModal = ({boardModalIsOpen, onModalClose, createBoard}) => {
                     <span className="close" onClick={handleModalClose}>&times;</span>
                 </div>
                 <h3>Create a New Board</h3>
-                <form onSubmit={handleNewBoardSubmit}>
+                <form onSubmit={handleNewBoardSubmit} className="new-board-modal-form">
                     <input type="text" placeholder="Board Title" value={title} onChange={(event) => setTitle(event.target.value)}/>
                     <input type="text" placeholder="Category (Celebration, Thank You, or Inspiration)" value={category} onChange={(event) => setCategory(event.target.value)}/>
-                    <input type="text" placeholder="Author" value={author} onChange={(event) => setAuthor(event.target.value)}/>
+                    <input type="text" placeholder="Author (optional)" value={author} onChange={(event) => setAuthor(event.target.value)}/>
                     <input type="text" placeholder="Image" value={image} onChange={(event) => setImage(event.target.value)}/>
                     <div className="new-board-modal-buttons">
-                        <button type="submit">Submit</button>
+                        <button type="submit" className="new-board-modal-submit">Submit</button>
                     </div>
                 </form>
             </div>
