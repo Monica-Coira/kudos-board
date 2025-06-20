@@ -5,7 +5,7 @@ const NewBoardModal = ({boardModalIsOpen, onModalClose, createBoard}) => {
     const [title, setTitle] = useState("")
     const [category, setCategory] = useState("")
     const [author, setAuthor] = useState("")
-    const [image, setImage] = useState("")
+    const [image, setImage] = useState("https://picsum.photos/200/260")
 
     if (!boardModalIsOpen){
         return null;
@@ -34,7 +34,8 @@ const NewBoardModal = ({boardModalIsOpen, onModalClose, createBoard}) => {
                     <input type="text" placeholder="Board Title" value={title} onChange={(event) => setTitle(event.target.value)}/>
                     <input type="text" placeholder="Category (Celebration, Thank You, or Inspiration)" value={category} onChange={(event) => setCategory(event.target.value)}/>
                     <input type="text" placeholder="Author (optional)" value={author} onChange={(event) => setAuthor(event.target.value)}/>
-                    <input type="text" placeholder="Image" value={image} onChange={(event) => setImage(event.target.value)}/>
+                    <label className="image-label">Image: (will be randomly generated if not replaced)</label>
+                    <input type="text" placeholder="Image (optional)" value={image} onChange={(event) => setImage(event.target.value)}/>
                     <div className="new-board-modal-buttons">
                         <button type="submit" className="new-board-modal-submit">Submit</button>
                     </div>
