@@ -39,3 +39,14 @@
 .board-card:hover {
     transform: scale(1.03) translateY(-2px);
 }
+
+.pinned-button {
+    background-color: #FF746C;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.pin-button {
+    background-color: #00D8D8;
+    cursor: pointer;
+}

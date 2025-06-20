@@ -1,13 +1,22 @@
 import './BoardCard.css'
 import { useState } from 'react';
 
-const BoardCard = ({cardImage, cardDescription, upvotes, cardAuthor, cardId, upvoteCard, deleteCard}) => {
+const BoardCard = ({cardImage, cardDescription, upvotes, cardAuthor, cardId, cardPinned, upvoteCard, deleteCard, pinCard, unpinCard}) => {
     const handleUpvote = () => {
         upvoteCard(cardId);
     }
 
     const handleDeleteCard = () => {
         deleteCard(cardId);
+    }
+
+    const handlePin = () => {
+        if (!cardPinned){
+            pinCard(cardId);
+        }
+        else {
+            unpinCard(cardId);
+        }
     }
 
     return (
@@ -18,6 +27,7 @@ const BoardCard = ({cardImage, cardDescription, upvotes, cardAuthor, cardId, upv
             <div className="board-card-buttons">
                 <button className="upvote-button" onClick={handleUpvote}>Upvote: {upvotes}</button>
                 <button className="board-card-delete-button" onClick={handleDeleteCard}>Delete</button>
+                <button className={cardPinned ? "pinned-button" : "pin-button"} onClick={handlePin}>Pin</button>
             </div>
         </div>
     )

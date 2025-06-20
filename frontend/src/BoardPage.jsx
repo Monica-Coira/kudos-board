@@ -45,6 +45,14 @@ const BoardPage = () => {
         await fetchData(`cards/upvote/${boardId}/${cardId}`, setCardData, "PUT");
     }
 
+    const pinCard = async (cardId) => {
+        await fetchData(`cards/pin/${boardId}/${cardId}`, setCardData, "PUT");
+    }
+
+    const unpinCard = async (cardId) => {
+        await fetchData(`cards/unpin/${boardId}/${cardId}`, setCardData, "PUT");
+    }
+
     const createCard = async ({cardMessage, cardGiphyLink, cardAuthor}) => {
         try {
             const newCardData = {
@@ -104,7 +112,7 @@ const BoardPage = () => {
                     {
                         cardData.map(obj => {
                             return (
-                                <BoardCard cardDescription={obj.message} cardImage={obj.giphyLink} upvotes={obj.upvotes} cardAuthor={obj.author} cardId={obj.id} upvoteCard={upvoteCard} deleteCard={deleteCard}/>
+                                <BoardCard cardDescription={obj.message} cardImage={obj.giphyLink} upvotes={obj.upvotes} cardAuthor={obj.author} cardId={obj.id} cardPinned={obj.pinned} upvoteCard={upvoteCard} deleteCard={deleteCard} pinCard={pinCard} unpinCard={unpinCard}/>
                             )
                         })
                     }
