@@ -1,4 +1,11 @@
 .create-card-button {
-    background-color: #00D8D8;
+    background-color: #068484;
+    color: white;
+    width: 30%;
+}
+
+.create-card-button-dark {
+    background-color: #b4ced2;
+    color: black;
     width: 30%;
 }

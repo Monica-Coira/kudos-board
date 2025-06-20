@@ -4,7 +4,8 @@ import SearchForm from './SearchForm';
 import SortForm from './SortForm';
 import CreateBoard from './CreateBoard';
 import BoardList from './BoardList.jsx';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import NewBoardModal from './NewBoardModal.jsx';
 
 const App = () => {
@@ -12,6 +13,10 @@ const App = () => {
   const [deletedBoard, setDeletedBoard] = useState([])
   const [upvotedCard, setUpvotedCard] = useState([])
   const [boardModalIsOpen, setBoardModalIsOpen] = useState(false)
+  const [onDarkMode, setOnDarkMode] = useState(false)
+  const location = useLocation();
+  const { modeData } = location.state || {};
+  const initialRender = useRef(true);
 
   const fetchData = async (parameter, dataSetter, crudMethod = "GET") => {
     try {
@@ -74,27 +79,45 @@ const App = () => {
     fetchBoardData();
   }
 
+  const handleChangeMode = () => {
+    if (!onDarkMode){
+      setOnDarkMode(true);
+    }
+    else {
+      setOnDarkMode(false);
+    }
+  }
+
   useEffect(() => {
     fetchBoardData();
   }, [])
 
+  useEffect(() => {
+    if (initialRender.current){
+      initialRender.current = false;
+      return;
+    }
+    setOnDarkMode(modeData);
+  }, [location.state])
+
   return (
-    <div className="app">
-      <header className="app-header">
+    <div className={onDarkMode ? "app-dark" : "app"}>
+      <header className={onDarkMode ? "app-header-dark" : "app-header"}>
+        <button className={onDarkMode ? "mode-button-dark" : "mode-button"} onClick={handleChangeMode}>💡</button>
         <h1 className="app-title">Kudos Board</h1>
         <section className="header-forms">
-          <SearchForm fetchSearchData={fetchSearchData} fetchBoardData={fetchBoardData}/>
+          <SearchForm fetchSearchData={fetchSearchData} fetchBoardData={fetchBoardData} onDarkMode={onDarkMode}/>
           <SortForm fetchSortData={fetchSortData}/>
-          <CreateBoard setBoardModalIsOpen={setBoardModalIsOpen}/>
+          <CreateBoard setBoardModalIsOpen={setBoardModalIsOpen} onDarkMode={onDarkMode}/>
         </section>
       </header>
 
       <main className="app-main">
         <NewBoardModal boardModalIsOpen={boardModalIsOpen} onModalClose={onModalClose} createBoard={createBoard}/>
-        <BoardList data={boardData} deleteBoard={deleteBoard} />
+        <BoardList data={boardData} deleteBoard={deleteBoard} onDarkMode={onDarkMode} setOnDarkMode={setOnDarkMode}/>
       </main>
 
-      <footer>
+      <footer className={onDarkMode ? "app-footer-dark" : "app-footer"}>
         <p>© Monica Coira. All Rights Reserved.</p>
       </footer>
     </div>
