@@ -1,14 +1,23 @@
 import './BoardCard.css'
+import { useState } from 'react';
 
-const BoardCard = ({cardImage, cardTitle, cardDescription}) => {
+const BoardCard = ({cardImage, cardDescription, upvotes, cardAuthor, cardId, upvoteCard, deleteCard}) => {
+    const handleUpvote = () => {
+        upvoteCard(cardId);
+    }
+
+    const handleDeleteCard = () => {
+        deleteCard(cardId);
+    }
+
     return (
         <div className="board-card">
-            <h3 className="board-card-title">{cardTitle}</h3>
             <p className="board-card-description">{cardDescription}</p>
-            <img className="board-card-image" src={cardImage} alt={cardTitle} width="200" height="250"/>
+            <img className="board-card-image" src={cardImage} alt={cardDescription} width="150" height="190"/>
+            <p className="board-card-author">Author: {cardAuthor}</p>
             <div className="board-card-buttons">
-                <button className="upvote-button">Upvote</button>
-                <button className="board-card-delete-button">Delete</button>
+                <button className="upvote-button" onClick={handleUpvote}>Upvote: {upvotes}</button>
+                <button className="board-card-delete-button" onClick={handleDeleteCard}>Delete</button>
             </div>
         </div>
     )

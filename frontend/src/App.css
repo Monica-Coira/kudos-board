@@ -1,15 +1,22 @@
 #root {
   margin: 0 auto;
   text-align: center;
+  width: 100%;
 }
 
 .app {
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-title {
   font-size: 40px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
 }
 
 .app-header {
@@ -18,12 +25,23 @@
   align-items: center;
   color: black;
   width: 100%;
+  padding: 20px;
 }
 
 .header-forms {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding-top: 10px;
+}
+
+.header-forms select,
+.header-forms input[type="text"] {
+  padding: 10px;
+  font-size: 15px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid black;
 }
 
 .app-main {
@@ -31,6 +49,7 @@
   justify-content: center;
   align-items: center;
   margin: 25px;
+  flex: 1;
 }
 
 footer {
@@ -39,6 +58,6 @@ footer {
   align-items: center;
   justify-content: center;
   color: black;
-  margin-top: 20px;
   width: 100%;
+  margin: auto;
 }

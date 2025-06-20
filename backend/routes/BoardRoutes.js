@@ -4,7 +4,11 @@ const router = express.Router()
 const prisma = new PrismaClient();
 
 router.get('/', async (req, res) => {
-    const boards = await prisma.board.findMany();
+    const boards = await prisma.board.findMany({
+        orderBy: {
+            id: "desc",
+        }
+    });
     res.json(boards);
 })
 
@@ -12,12 +16,20 @@ router.get('/', async (req, res) => {
 router.get('/sort', async (req, res) => {
     const { category } = req.query;
     let filters = {};
-    if (category){
+    let filteredBoards = [];
+    if (category === "Recent"){
         filters.category = category;
+        filteredBoards = await prisma.board.findMany({
+            orderBy: {id: "desc"},
+        });
+        filteredBoards = filteredBoards.slice(0, 6);
     }
-    const filteredBoards = await prisma.board.findMany({
-        where: {category : filters.category},
-    });
+    else if (category){
+        filters.category = category;
+        filteredBoards = await prisma.board.findMany({
+            where: {category : filters.category},
+        });
+    }
     res.json(filteredBoards);
 })
 
@@ -26,10 +38,13 @@ router.get('/search', async (req, res) => {
     const { title } = req.query;
     let filters = {};
     if (title){
-        filters.title = title;
+        filters.title = {
+            contains: title,
+            mode: 'insensitive'
+        }
     }
     const filteredBoards = await prisma.board.findMany({
-        where: {title : filters.title},
+        where: filters,
     });
     res.json(filteredBoards);
 })
@@ -47,15 +62,13 @@ router.post('/', async (req, res) => {
     if (!req.body.title || !req.body.category) {
         return res.status(400).send('Title and category are required.')
     }
-    const { id, title, category, author, image, cards } = req.body
+    const { title, category, author, image } = req.body
     const newBoard = await prisma.board.create({
         data: {
-        id,
         title,
         category,
         author,
-        image,
-        cards
+        image
         }
     })
     res.json(newBoard)

@@ -1,13 +1,13 @@
 .kudos-board {
     text-align: center;
     padding: 15px;
-    width: calc(100% / 8);
-    margin: 35px;
-    display: inline-block;
+    width: calc(100% / 7);
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .kudos-board-image {
-    display: block;
+    display: flex;
     width: 100%;
     height: auto;
     border-radius: 10px;

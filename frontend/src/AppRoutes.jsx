@@ -6,7 +6,7 @@ const AppRoutes = () => {
     return (
     <Routes>
         <Route exact path='/' element={<App />}/>
-        <Route path='/boardpage' element={<BoardPage />}/>
+        <Route path='/boardpage/:boardId' element={<BoardPage />}/>
     </Routes>
     )
 }

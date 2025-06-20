@@ -3,6 +3,25 @@ const { PrismaClient } = require('@prisma/client')
 const router = express.Router()
 const prisma = new PrismaClient();
 
+router.get('/getTitle/:boardId', async (req, res) => {
+    const boardId = parseInt(req.params.boardId)
+    const board = await prisma.board.findMany({
+        where: { id : parseInt(boardId) },
+    });
+    res.json(board);
+})
+
+router.get('/:boardId', async (req, res) => {
+    const boardId = parseInt(req.params.boardId)
+    const cards = await prisma.card.findMany({
+        where: { board_id : parseInt(boardId) },
+        orderBy: {
+            id: "desc",
+        }
+    });
+    res.json(cards);
+})
+
 router.get('/', async (req, res) => {
     const cards = await prisma.card.findMany();
     res.json(cards);
@@ -36,23 +55,42 @@ router.post('/', async (req, res) => {
     res.json(newCard)
 })
 
-router.put('/:cardId', async (req, res) => {
-    const { cardId } = req.params
-    const { id, board_id, message, giphyLink, upvotes, author, pinned, board } = req.body
-    const updatedCard = await prisma.card.update({
-        where: { id: parseInt(cardId) },
+router.put('/upvote/:boardId/:cardId', async (req, res) => {
+    const cardId = parseInt(req.params.cardId);
+    const boardId = parseInt(req.params.boardId);
+    const upvotedCard = await prisma.card.update({
+        where: { id: cardId },
         data: {
-        id,
+            upvotes: {
+                increment: 1,
+            },
+        },
+    })
+    const upvotedCards = await prisma.card.findMany({
+        where: { board_id: boardId },
+        orderBy: {
+            id: "desc",
+        }
+    })
+    res.json(upvotedCards);
+})
+
+router.post('/', async (req, res) => {
+    if (!req.body.message || !req.body.giphyLink) {
+        return res.status(400).send('Message and GIPHY link are required.')
+    }
+    const { board_id, message, giphyLink, upvotes, author, pinned } = req.body
+    const newCard = await prisma.card.create({
+        data: {
         board_id,
         message,
         giphyLink,
         upvotes,
         author,
-        pinned,
-        board
+        pinned
         }
     })
-    res.json(updatedCard)
+    res.json(newCard)
 })
 
 router.delete('/:cardId', async (req, res) => {
