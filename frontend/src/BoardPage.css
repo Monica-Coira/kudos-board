@@ -17,21 +17,21 @@
 }
 
 .mode-button {
-  font-size: 25px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 30px;
-  background-color: #068484;
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 30px;
+    background-color: #068484;
 }
 
 .mode-button-dark {
-  font-size: 25px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 30px;
-  background-color: #b4ced2;
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 30px;
+    background-color: #b4ced2;
 }
 
 .board-page-cards {

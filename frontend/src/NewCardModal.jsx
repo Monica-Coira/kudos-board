@@ -26,6 +26,7 @@ const NewCardModal = ({cardModalIsOpen, onCardModalClose, createCard}) => {
     if (!cardModalIsOpen){
         return null;
     }
+
     const handleNewCardSubmit = (event) => {
         event.preventDefault();
         createCard({ cardMessage, cardGiphyLink, cardAuthor });
@@ -37,6 +38,7 @@ const NewCardModal = ({cardModalIsOpen, onCardModalClose, createCard}) => {
         onCardModalClose();
         onCardModalClose();
     }
+    
     const handleCardModalClose = () => {
         setCardMessage("");
         setCardGiphyLink("");

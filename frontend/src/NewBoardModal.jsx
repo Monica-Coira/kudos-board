@@ -10,6 +10,7 @@ const NewBoardModal = ({boardModalIsOpen, onModalClose, createBoard}) => {
     if (!boardModalIsOpen){
         return null;
     }
+
     const handleNewBoardSubmit = (event) => {
         event.preventDefault();
         createBoard({ title, category, author, image });
@@ -18,6 +19,7 @@ const NewBoardModal = ({boardModalIsOpen, onModalClose, createBoard}) => {
         setAuthor("");
         onModalClose();
     }
+    
     const handleModalClose = () => {
         onModalClose();
     }

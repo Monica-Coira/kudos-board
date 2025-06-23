@@ -1,5 +1,4 @@
 import './CreateBoard.css'
-import { useState, useEffect } from 'react'
 
 const CreateBoard = ({ setBoardModalIsOpen, onDarkMode }) => {
     const handleCreateBoard = () => {
